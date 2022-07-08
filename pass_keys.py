@@ -2,11 +2,11 @@ import re
 
 from kittens.tui.handler import result_handler
 from kitty.key_encoding import KeyEvent, parse_shortcut
-
+from kittens.tui.loop import debug
 
 def is_window_vim(window):
-    return re.match(r'n?vim', window.child.title)
-
+    if window.override_title is None: return False
+    return bool(re.match(r'n?vim', window.override_title))
 
 def encode_key_mapping(window, key_mapping):
     mods, key = parse_shortcut(key_mapping)
