@@ -1,6 +1,8 @@
 Vim Kitty Navigator
 ==================
 
+Modified to work thru SSH
+
 This plugin is a port of [Chris Toomey's vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) plugin. When combined with a set of kitty
 key bindings and kittens, the plugin will allow you to navigate seamlessly between vim and kitty splits using a consistent set of hotkeys.
 
@@ -31,7 +33,7 @@ install the plugin:
 Add the following line to your `~/.vimrc` file
 
 ``` vim
-Plug 'knubie/vim-kitty-navigator'
+Plug 'leastfavorite/vim-kitty-navigator'
 ```
 
 Then run

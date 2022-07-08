@@ -26,9 +26,9 @@ command! KittyNavigateDown     call s:KittyAwareNavigate('j')
 command! KittyNavigateUp       call s:KittyAwareNavigate('k')
 command! KittyNavigateRight    call s:KittyAwareNavigate('l')
 
-function! s:KittyCommand(args)
-  let cmd = 'kitty @ ' . a:args
-  return system(cmd)
+function! s:KittyCommand(name, args)
+  let cmd = nr2char(27).'P@kitty-cmd{"cmd":"'.a:name.'","version":[0,14,2],"no_response":true,"payload":{'.a:args.'}}'.nr2char(27).'\'
+  call writefile([cmd],'/dev/tty','b')
 endfunction
 
 let s:kitty_is_last_pane = 0
@@ -53,8 +53,8 @@ function! s:KittyAwareNavigate(direction)
     \   "k": "top",
     \   "l": "right"
     \ }
-    let args = 'kitten neighboring_window.py' . ' ' . mappings[a:direction]
-    silent call s:KittyCommand(args)
+    let args = '"args":["'.mappings[a:direction].'"]'
+    silent call s:KittyCommand('kitten', '"kitten":"neighboring_window.py",'.args)
     let s:kitty_is_last_pane = 1
   else
     let s:kitty_is_last_pane = 0
